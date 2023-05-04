@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% if id2 %}
+    <link rel="stylesheet" href="../../static/css/index.css" />
+    {% elif id1 %}
+    <link rel="stylesheet" href="../static/css/index.css" />
+    {% else %}
+    <link rel="stylesheet" href="static/css/index.css" />
+    {% endif %}
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/skaters">Skaters</a>
+        <a href="/games">Games</a>
+        <a href="/goalies">Goalies</a>
+        <a href="/lines">Lines</a>
+        <a href="/leaders">Leaders</a>
+        <a href="/usergames">User Games</a>
+        <a href="/addgame">Add Game</a>
+        <a href="/search">Player Search</a>
+      </div>
+      {% if id1 %}
+      <h3>{{ playerLst1[0][0] }}</h3>
+      <div id="pTable" class="dTable">
+        <table>
+          <tr>
+            <th>Team</th>
+            <th>Season</th>
+            <th>Position</th>
+            <th>Assists</th>
+            <th>Assists Rank</th>
+            <th>Goals</th>
+            <th>Goals Rank</th>
+            <th>Points</th>
+            <th>Points Rank</th>
+            <th>Penalties</th>
+            <th>Penalty Minutes</th>
+            <th>Hits</th>
+            <th>Penalties Drawn</th>
+            <th>Shot Blocks</th>
+            <th>PlusMinus</th>
+            <th>Best Line</th>
+          </tr>
+          {% for player in playerLst1 %}
+          <tr>
+            {% for stat in player %}
+            {% if not loop.first %}
+            <td>{{ stat }}</td>
+            {% endif %}
+            {% if loop.last %}
+            <td>{{ bestLine1[0][0] }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      {% endif %}
+      <br>
+      {% if id2 %}
+      <h3>{{ playerLst2[0][0] }}</h3>
+      <div id="pTable" class="dTable">
+        <table>
+          <tr>
+            <th>Team</th>
+            <th>Season</th>
+            <th>Position</th>
+            <th>Assists</th>
+            <th>Assists Rank</th>
+            <th>Goals</th>
+            <th>Goals Rank</th>
+            <th>Points</th>
+            <th>Points Rank</th>
+            <th>Penalties</th>
+            <th>Penalty Minutes</th>
+            <th>Hits</th>
+            <th>Penalties Drawn</th>
+            <th>Shot Blocks</th>
+            <th>Plus Minus</th>
+            <th>Best Line</th>
+          </tr>
+          {% for player in playerLst2 %}
+          <tr>
+            {% for stat in player %}
+            {% if not loop.first %}
+            <td>{{ stat }}</td>
+            {% endif %}
+            {% if loop.last %}
+            <td>{{ bestLine2[0][0] }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+      </div>
+</body>
+</html>

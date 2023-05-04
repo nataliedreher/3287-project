@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/index.css" />
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/skaters">Skaters</a>
+        <a href="/games">Games</a>
+        <a href="/goalies">Goalies</a>
+        <a href="/lines">Lines</a>
+        <a href="/leaders">Leaders</a>
+        <a href="/usergames">User Games</a>
+        <a href="/addgame">Add Game</a>
+        <a class="active" href="/search">Player Search</a>
+    </div>
+    {% from "_formhelpers.html" import render_field %}
+    <form method="post">
+
+        <p>
+          {{ render_field(form.search) }}
+        </p>
+        <p>
+            <input type="submit" value="Search"/>
+        </p>
+    </form>
+        {% if foundRes %}
+        {% if resLst|length > 0 %}<h3>Choose a player:</h3>{% endif %}
+        {% if tooShort %}
+        <h3>Please enter at least three letters into search.</h3>
+        {% endif %}
+        {% for res in resLst %}
+            <div>
+                <a href="/player/{{ res[1] }}">{{ res[0] }}</a>
+            </div>
+        {% endfor %}
+        {% else %}
+    
+        <h3>No players found.</h3>
+        {% endif %}
+        
+</body>
+</html>

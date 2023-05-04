@@ -1,13 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-	<script src="static/javascript/index.js"></script>
-  </body>
+    <title>Lines</title>
+    {% if team1 %}
+    <link rel="stylesheet" href="../static/css/index.css" />
+    {% else %}
+    <link rel="stylesheet" href="static/css/index.css" />
+    {% endif %}
+</head>
+<body>
+  <div class="topnav">
+    <a href="/">Home</a>
+    <a href="/skaters">Skaters</a>
+    <a href="/games">Games</a>
+    <a href="/goalies">Goalies</a>
+    <a class="active" href="/lines">Lines</a>
+    <a href="/leaders">Leaders</a>
+    <a href="/usergames">User Games</a>
+    <a href="/addgame">Add Game</a>
+    <a href="/search">Player Search</a>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">{% if team1 %}{{ team1 }}{% else %}Team{% endif %}</button>
+    <div class="dropdown-content">
+      <a href='/lines/ANA'>ANA</a>
+      <a href='/lines/ARI'>ARI</a>
+      <a href='/lines/BOS'>BOS</a>
+      <a href='/lines/BUF'>BUF</a>
+      <a href='/lines/CAR'>CAR</a>
+      <a href='/lines/CBJ'>CBJ</a>
+      <a href='/lines/CGY'>CGY</a>
+      <a href='/lines/CHI'>CHI</a>
+      <a href='/lines/COL'>COL</a>
+      <a href='/lines/DAL'>DAL</a>
+      <a href='/lines/DET'>DET</a>
+      <a href='/lines/EDM'>EDM</a>
+      <a href='/lines/FLA'>FLA</a>
+      <a href='/lines/LAK'>LAK</a>
+      <a href='/lines/MIN'>MIN</a>
+      <a href='/lines/MTL'>MTL</a>
+      <a href='/lines/NJD'>NJD</a>
+      <a href='/lines/NSH'>NSH</a>
+      <a href='/lines/NYI'>NYI</a>
+      <a href='/lines/NYR'>NYR</a>
+      <a href='/lines/OTT'>OTT</a>
+      <a href='/lines/PHI'>PHI</a>
+      <a href='/lines/PIT'>PIT</a>
+      <a href='/lines/SEA'>SEA</a>
+      <a href='/lines/SJS'>SJS</a>
+      <a href='/lines/STL'>STL</a>
+      <a href='/lines/TBL'>TBL</a>
+      <a href='/lines/TOR'>TOR</a>
+      <a href='/lines/VAN'>VAN</a>
+      <a href='/lines/VGK'>VGK</a>
+      <a href='/lines/WPG'>WPG</a>
+      <a href='/lines/WSH'>WSH</a>                
+    </div>
+  </div>
+  {% if team1 %}
+  <div class="dTable">
+    <table>
+      <thead>
+        <tr>
+          <th>Season</th>
+          <th>Name</th>
+          <th>Team</th>
+          <th>Position</th>
+          <th>Games Played</th>
+          <th>Icetime</th>
+          <th>Goals For</th>
+          <th>Penalties</th>
+          <th>Penalty Minutes</th>
+          <th>Hits For</th>
+          <th>Takeaways</th>
+          <th>Giveaways</th>
+          <th>Goals Against</th>
+          <th>Penalties Drawn</th>
+          <th>Penality Minutes Drawn</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for line in linesLst %}
+        <tr>
+          {% for stat in line %}
+          <td>{{ stat }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    
+
+  </div>      
+</body>
 </html>

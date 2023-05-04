@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skaters</title>
+    {% if team1 %}
+    <link rel="stylesheet" href="../static/css/index.css" />
+    {% else %}
+    <link rel="stylesheet" href="static/css/index.css" />
+    {% endif %}
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a class="active" href="/skaters">Skaters</a>
+        <a href="/games">Games</a>
+        <a href="/goalies">Goalies</a>
+        <a href="/lines">Lines</a>
+        <a href="/leaders">Leaders</a>
+        <a href="/search">Player Search</a>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">{% if team1 %}{{ team1 }}{% else %}Team{% endif %}</button>
+        <div class="dropdown-content">
+          <a href='/skaters/ANA'>ANA</a>
+          <a href='/skaters/ARI'>ARI</a>
+          <a href='/skaters/BOS'>BOS</a>
+          <a href='/skaters/BUF'>BUF</a>
+          <a href='/skaters/CAR'>CAR</a>
+          <a href='/skaters/CBJ'>CBJ</a>
+          <a href='/skaters/CGY'>CGY</a>
+          <a href='/skaters/CHI'>CHI</a>
+          <a href='/skaters/COL'>COL</a>
+          <a href='/skaters/DAL'>DAL</a>
+          <a href='/skaters/DET'>DET</a>
+          <a href='/skaters/EDM'>EDM</a>
+          <a href='/skaters/FLA'>FLA</a>
+          <a href='/skaters/LAK'>LAK</a>
+          <a href='/skaters/MIN'>MIN</a>
+          <a href='/skaters/MTL'>MTL</a>
+          <a href='/skaters/NJD'>NJD</a>
+          <a href='/skaters/NSH'>NSH</a>
+          <a href='/skaters/NYI'>NYI</a>
+          <a href='/skaters/NYR'>NYR</a>
+          <a href='/skaters/OTT'>OTT</a>
+          <a href='/skaters/PHI'>PHI</a>
+          <a href='/skaters/PIT'>PIT</a>
+          <a href='/skaters/SEA'>SEA</a>
+          <a href='/skaters/SJS'>SJS</a>
+          <a href='/skaters/STL'>STL</a>
+          <a href='/skaters/TBL'>TBL</a>
+          <a href='/skaters/TOR'>TOR</a>
+          <a href='/skaters/VAN'>VAN</a>
+          <a href='/skaters/VGK'>VGK</a>
+          <a href='/skaters/WPG'>WPG</a>
+          <a href='/skaters/WSH'>WSH</a>                
+        </div>
+      </div>
+      {% if team1 %}
+      <div class="dTable">
+        <table>
+          <tr>
+            <th>playerId</th>
+            <th>season</th>
+            <th>name</th>
+            <th>team</th>
+            <th>position</th>
+            <th>situation</th>
+            <th>games_played</th>
+            <th>primaryAssists</th>
+            <th>secondaryAssists</th>
+            <th>shotsOnGoal</th>
+            <th>shotAttempts</th>
+            <th>points</th>
+            <th>goals</th>
+            <th>penalties</th>
+            <th>penalityMinutes</th>
+            <th>hits</th>
+            <th>takeaways</th>
+            <th>giveaways</th>
+            <th>lowDangerGoals</th>
+            <th>mediumDangerGoals</th>
+            <th>highDangerGoals</th>
+            <th>faceoffsWon</th>
+            <th>faceoffsLost</th>
+            <th>penalityMinutesDrawn</th>
+            <th>penaltiesDrawn</th>
+            <th>shotsBlockedByPlayer</th>
+            <th>OnIce_F_goals</th>
+            <th>OnIce_A_goals</th>
+
+          </tr>
+          {% for skater in skaterLst %}
+          <tr>
+            {% for stat in skater %}
+            <td>{{ stat }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        {% endif %}  
+</body>
+</html>

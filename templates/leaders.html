@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skaters</title>
+    {% if stat %}
+    <link rel="stylesheet" href="../static/css/index.css" />
+    {% else %}
+    <link rel="stylesheet" href="static/css/index.css" />
+    {% endif %}
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/skaters">Skaters</a>
+        <a href="/games">Games</a>
+        <a href="/goalies">Goalies</a>
+        <a href="/lines">Lines</a>
+        <a class="active" href="/leaders">Leaders</a>
+        <a href="/usergames">User Games</a>
+        <a href="/addgame">Add Game</a>
+        <a href="/search">Player Search</a>
+      </div>
+      <div class="dTable">
+        <table>
+          <tr>
+            <th><a>Name</a></th>
+            <th><a>Team</a></th>
+            <th><a>Season</a></th>
+            <th><a>Position</a></th>
+            <th><a href="/leaders/Assists">Assists</a></th>
+            <th><a href="/leaders/goals">Goals</a></th>
+            <th><a href="/leaders/points">Points</a></th>
+            <th><a href="/leaders/penalties">Penalties</a></th>
+            <th><a href="/leaders/penalityMinutes">Penalty Minutes</a></th>
+            <th><a href="/leaders/hits">Hits</a></th>
+            <th><a href="/leaders/penaltiesDrawn">Penalties Drawn</a></th>
+            <th><a href="/leaders/shotsBlockedByPlayer">Shot Blocks</a></th>
+            <th><a href="/leaders/PlusMinus">Plus Minus</a></th>
+
+
+          </tr>
+          {% for leader in leadersLst %}
+          <tr>
+            {% for stat in leader %}
+            <td>{{ stat }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+
+</body>
+</html>

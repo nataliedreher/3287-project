@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goalies</title>
+    {% if team1 %}
+    <link rel="stylesheet" href="../static/css/index.css" />
+    {% else %}
+    <link rel="stylesheet" href="static/css/index.css" />
+    {% endif %}
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/skaters">Skaters</a>
+        <a href="/games">Games</a>
+        <a class="active" href="/goalies">Goalies</a>
+        <a href="/lines">Lines</a>
+        <a href="/leaders">Leaders</a>
+        <a href="/usergames">User Games</a>
+        <a href="/addgame">Add Game</a>
+        <a href="/search">Player Search</a>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">{% if team1 %}{{ team1 }}{% else %}Team{% endif %}</button>
+        <div class="dropdown-content">
+          <a href='/goalies/ANA'>ANA</a>
+          <a href='/goalies/ARI'>ARI</a>
+          <a href='/goalies/BOS'>BOS</a>
+          <a href='/goalies/BUF'>BUF</a>
+          <a href='/goalies/CAR'>CAR</a>
+          <a href='/goalies/CBJ'>CBJ</a>
+          <a href='/goalies/CGY'>CGY</a>
+          <a href='/goalies/CHI'>CHI</a>
+          <a href='/goalies/COL'>COL</a>
+          <a href='/goalies/DAL'>DAL</a>
+          <a href='/goalies/DET'>DET</a>
+          <a href='/goalies/EDM'>EDM</a>
+          <a href='/goalies/FLA'>FLA</a>
+          <a href='/goalies/LAK'>LAK</a>
+          <a href='/goalies/MIN'>MIN</a>
+          <a href='/goalies/MTL'>MTL</a>
+          <a href='/goalies/NJD'>NJD</a>
+          <a href='/goalies/NSH'>NSH</a>
+          <a href='/goalies/NYI'>NYI</a>
+          <a href='/goalies/NYR'>NYR</a>
+          <a href='/goalies/OTT'>OTT</a>
+          <a href='/goalies/PHI'>PHI</a>
+          <a href='/goalies/PIT'>PIT</a>
+          <a href='/goalies/SEA'>SEA</a>
+          <a href='/goalies/SJS'>SJS</a>
+          <a href='/goalies/STL'>STL</a>
+          <a href='/goalies/TBL'>TBL</a>
+          <a href='/goalies/TOR'>TOR</a>
+          <a href='/goalies/VAN'>VAN</a>
+          <a href='/goalies/VGK'>VGK</a>
+          <a href='/goalies/WPG'>WPG</a>
+          <a href='/goalies/WSH'>WSH</a>                
+        </div>
+      </div>
+      {% if team1 %}
+      <div class="dTable">
+        <table>
+          <tr>
+            <th>playerId</th>
+            <th>season</th>
+            <th>name</th>
+            <th>team</th>
+            <th>position</th>
+            <th>situation</th>
+            <th>games_played</th>
+            <th>goals</th>
+            <th>rebounds</th>
+            <th>lowDangerShots</th>
+            <th>mediumDangerShots</th>
+            <th>highDangerShots</th>
+            <th>lowDangerGoals</th>
+            <th>mediumDangerGoals</th>
+            <th>highDangerGoals</th>
+            <th>penalityMinutes</th>
+            <th>penalties</th>
+          </tr>
+          {% for goalie in goalieLst %}
+          <tr>
+            {% for stat in goalie %}
+            <td>{{ stat }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        {% endif %}  
+
+</body>
+</html>

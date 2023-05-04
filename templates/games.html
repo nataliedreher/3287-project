@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    {% if team2 %}
+    <link rel="stylesheet" href="../../../static/css/index.css" />
+    {% elif team1 %}
+    <link rel="stylesheet" href="../../static/css/index.css" />
+    {% elif season %}
+    <link rel="stylesheet" href="../static/css/index.css" />
+    {% else %}
+    <link rel="stylesheet" href="static/css/index.css" />
+    {% endif %}
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/skaters">Skaters</a>
+        <a class="active"  href="/games">Games</a>
+        <a href="/goalies">Goalies</a>
+        <a href="/lines">Lines</a>
+        <a href="/leaders">Leaders</a>
+        <a href="/usergames">User Games</a>
+        <a href="/addgame">Add Game</a>
+        <a href="/search">Player Search</a>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">{% if season %}{{ season }}{% else %}season{% endif %}</button>
+        <div class="dropdown-content">
+            <a href='/games/2017'>2017</a>
+            <a href='/games/2018'>2018</a>
+            <a href='/games/2019'>2019</a>
+            <a href='/games/2020'>2020</a>
+            <a href='/games/2021'>2021</a>
+            <a href='/games/2022'>2022</a>         
+        </div>
+    </div>
+    {% if season %}
+    <div class="dropdown">
+        <button class="dropbtn">{% if team1 %}{{ team1 }}{% else %}Team 1{% endif %}</button>
+        <div class="dropdown-content">
+            <a href='/games/{{ season }}/ANA'>ANA</a>
+            <a href='/games/{{ season }}/ARI'>ARI</a>
+            <a href='/games/{{ season }}/BOS'>BOS</a>
+            <a href='/games/{{ season }}/BUF'>BUF</a>
+            <a href='/games/{{ season }}/CAR'>CAR</a>
+            <a href='/games/{{ season }}/CBJ'>CBJ</a>
+            <a href='/games/{{ season }}/CGY'>CGY</a>
+            <a href='/games/{{ season }}/CHI'>CHI</a>
+            <a href='/games/{{ season }}/COL'>COL</a>
+            <a href='/games/{{ season }}/DAL'>DAL</a>
+            <a href='/games/{{ season }}/DET'>DET</a>
+            <a href='/games/{{ season }}/EDM'>EDM</a>
+            <a href='/games/{{ season }}/FLA'>FLA</a>
+            <a href='/games/{{ season }}/LAK'>LAK</a>
+            <a href='/games/{{ season }}/MIN'>MIN</a>
+            <a href='/games/{{ season }}/MTL'>MTL</a>
+            <a href='/games/{{ season }}/NJD'>NJD</a>
+            <a href='/games/{{ season }}/NSH'>NSH</a>
+            <a href='/games/{{ season }}/NYI'>NYI</a>
+            <a href='/games/{{ season }}/NYR'>NYR</a>
+            <a href='/games/{{ season }}/OTT'>OTT</a>
+            <a href='/games/{{ season }}/PHI'>PHI</a>
+            <a href='/games/{{ season }}/PIT'>PIT</a>
+            <a href='/games/{{ season }}/SEA'>SEA</a>
+            <a href='/games/{{ season }}/SJS'>SJS</a>
+            <a href='/games/{{ season }}/STL'>STL</a>
+            <a href='/games/{{ season }}/TBL'>TBL</a>
+            <a href='/games/{{ season }}/TOR'>TOR</a>
+            <a href='/games/{{ season }}/VAN'>VAN</a>
+            <a href='/games/{{ season }}/VGK'>VGK</a>
+            <a href='/games/{{ season }}/WPG'>WPG</a>
+            <a href='/games/{{ season }}/WSH'>WSH</a>                
+        </div>
+    </div>
+    {% endif %}
+    {% if team1 %}
+    <div class="dropdown">
+        <button class="dropbtn">{% if team2 %}{{ team2 }}{% else %}Team 2{% endif %}</button>
+        <div class="dropdown-content">
+            <a href='/games/{{ season }}/{{ team1 }}/ANA'>ANA</a>
+            <a href='/games/{{ season }}/{{ team1 }}/ARI'>ARI</a>
+            <a href='/games/{{ season }}/{{ team1 }}/BOS'>BOS</a>
+            <a href='/games/{{ season }}/{{ team1 }}/BUF'>BUF</a>
+            <a href='/games/{{ season }}/{{ team1 }}/CAR'>CAR</a>
+            <a href='/games/{{ season }}/{{ team1 }}/CBJ'>CBJ</a>
+            <a href='/games/{{ season }}/{{ team1 }}/CGY'>CGY</a>
+            <a href='/games/{{ season }}/{{ team1 }}/CHI'>CHI</a>
+            <a href='/games/{{ season }}/{{ team1 }}/COL'>COL</a>
+            <a href='/games/{{ season }}/{{ team1 }}/DAL'>DAL</a>
+            <a href='/games/{{ season }}/{{ team1 }}/DET'>DET</a>
+            <a href='/games/{{ season }}/{{ team1 }}/EDM'>EDM</a>
+            <a href='/games/{{ season }}/{{ team1 }}/FLA'>FLA</a>
+            <a href='/games/{{ season }}/{{ team1 }}/LAK'>LAK</a>
+            <a href='/games/{{ season }}/{{ team1 }}/MIN'>MIN</a>
+            <a href='/games/{{ season }}/{{ team1 }}/MTL'>MTL</a>
+            <a href='/games/{{ season }}/{{ team1 }}/NJD'>NJD</a>
+            <a href='/games/{{ season }}/{{ team1 }}/NSH'>NSH</a>
+            <a href='/games/{{ season }}/{{ team1 }}/NYI'>NYI</a>
+            <a href='/games/{{ season }}/{{ team1 }}/NYR'>NYR</a>
+            <a href='/games/{{ season }}/{{ team1 }}/OTT'>OTT</a>
+            <a href='/games/{{ season }}/{{ team1 }}/PHI'>PHI</a>
+            <a href='/games/{{ season }}/{{ team1 }}/PIT'>PIT</a>
+            <a href='/games/{{ season }}/{{ team1 }}/SEA'>SEA</a>
+            <a href='/games/{{ season }}/{{ team1 }}/SJS'>SJS</a>
+            <a href='/games/{{ season }}/{{ team1 }}/STL'>STL</a>
+            <a href='/games/{{ season }}/{{ team1 }}/TBL'>TBL</a>
+            <a href='/games/{{ season }}/{{ team1 }}/TOR'>TOR</a>
+            <a href='/games/{{ season }}/{{ team1 }}/VAN'>VAN</a>
+            <a href='/games/{{ season }}/{{ team1 }}/VGK'>VGK</a>
+            <a href='/games/{{ season }}/{{ team1 }}/WPG'>WPG</a>
+            <a href='/games/{{ season }}/{{ team1 }}/WSH'>WSH</a> 
+        </div>
+    </div>
+    {% endif %}
+
+    {% if team1 and team2 %}
+    <div class="dTable">
+        <table>
+        <tr>
+            <th>team</th>
+            <th>season</th>
+            <th>gameId</th>
+            <th>opposingTeam</th>
+            <th>home_or_away</th>
+            <th>gameDate</th>
+            <th>situation</th>
+            <th>shotsOnGoalFor</th>
+            <th>blockedShotAttemptsFor</th>
+            <th>shotAttemptsFor</th>
+            <th>goalsFor</th>
+            <th>savedShotsOnGoalFor</th>
+            <th>penaltiesFor</th>
+            <th>penalityMinutesFor</th>
+            <th>faceOffsWonFor</th>
+            <th>hitsFor</th>
+            <th>takeawaysFor</th>
+            <th>giveawaysFor</th>
+            <th>lowDangerShotsFor</th>
+            <th>mediumDangerShotsFor</th>
+            <th>highDangerShotsFor</th>
+            <th>lowDangerGoalsFor</th>
+            <th>mediumDangerGoalsFor</th>
+            <th>highDangerGoalsFor</th>
+            <th>shotsOnGoalAgainst</th>
+            <th>goalsAgainst</th>
+            <th>penaltiesAgainst</th>
+            <th>penalityMinutesAgainst</th>
+            <th>faceOffsWonAgainst</th>
+            <th>hitsAgainst</th>
+            <th>lowDangerGoalsAgainst</th>
+            <th>mediumDangerGoalsAgainst</th>
+            <th>highDangerGoalsAgainst</th>
+            <th>playoffGame</th>
+        </tr>
+        {% for game in gamesLst %}
+        <tr>
+            {% for stat in game %}
+            <td>{{ stat }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</body>
+</html>
+<script src="static/javascript/index.js"></script>
