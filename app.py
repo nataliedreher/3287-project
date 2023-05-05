@@ -261,7 +261,7 @@ def addgame():
 
 
 @app.route('/usergames')
-@app.route('/usergames/<string:gameid>')
+@app.route('/usergames/<int:gameid>')
 def usergame(gameid=None):
 
     if gameid:
@@ -294,7 +294,7 @@ def usergame(gameid=None):
 
 
 
-@app.route('/usergames/<string:gameid>/addplay', methods=['GET', 'POST'])
+@app.route('/usergames/<int:gameid>/addplay', methods=['GET', 'POST'])
 def addplay(gameid=None):
     form = AddPlayForm(request.form)
 
@@ -326,3 +326,14 @@ def addplay(gameid=None):
 
 
 
+@app.route('/deletegame/<int:gameid>')
+def deletegame(gameid=None):
+    if not gameid:
+        return redirect('/usergames')
+    else:
+        conn = sqlite3.connect('hockey.db')
+        c = conn.cursor()
+        c.execute("DELETE FROM userGames WHERE userGameId=?", (gameid,))
+        conn.commit()
+        conn.close()
+        return redirect('/usergames')

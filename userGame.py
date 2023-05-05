@@ -21,5 +21,18 @@ c.execute(query)
 
 print("Table created successfully........")
 
+c.execute("DROP TRIGGER IF EXISTS if_delete")
+
+c.execute('''
+            
+            CREATE TRIGGER if_delete
+             AFTER DELETE ON userGames
+             FOR EACH ROW
+             BEGIN
+                 DELETE FROM userPlays WHERE userPlays.userGameId = OLD.userGameId;
+             END
+             ;
+             ''')
+
 conn.commit()
 conn.close()

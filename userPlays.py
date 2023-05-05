@@ -12,9 +12,11 @@ query ='''CREATE TABLE userPlays(
     team TEXT NOT NULL,
     period INTEGER,
     comment TEXT,
+    CHECK (period > 0 AND period < 5),
+    CONSTRAINT fk_games
     FOREIGN KEY (userGameId)
-        REFERENCES userGames (userGameId),
-    CHECK (period > 0 AND period < 5)
+        REFERENCES userGames (userGameId)
+        ON DELETE CASCADE
 )'''
 c.execute(query)
 

@@ -19,11 +19,12 @@
         <a href="/addgame">Add Game</a>
         <a href="/search">Player Search</a>
       </div>
-
+        <br>
         {% for game in ugIdList %}
         <div>
-            <a href="/usergames/{{ game[0] }}">{{ game[3] }} - {{ game[1] }} VS {{ game[2] }}</a>
+            <a href="/usergames/{{ game[0] }}">{{ game[3] }} - {{ game[1] }} VS {{ game[2] }}</a> - <a href="/deletegame/{{ game[0] }}">delete</a>
         </div>
+        <br>
         {% endfor %}
 </body>
 </html>
