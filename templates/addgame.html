@@ -20,21 +20,38 @@
         <a href="/search">Player Search</a>
       </div>
 
+      {% if tryAgain %}<h3>Please check inputs and resubmit</h3>{% endif %}
+
       {% from "_formhelpers.html" import render_field %}
     <form method="post">
 
         <p>
-          {{ render_field(form.search) }}
+          {{ render_field(form.homeTeam) }}
         </p>
         <p>
-            {{ render_field(form.search) }}
+            {{ render_field(form.awayTeam) }}
           </p>
           <p>
-            {{ render_field(form.search) }}
+            {{ render_field(form.gameDate) }}
           </p>
           <p>
-            {{ render_field(form.search) }}
+            {{ render_field(form.homeScore) }}
           </p>
+          <p>
+              {{ render_field(form.awayScore) }}
+            </p>
+            <p>
+              {{ render_field(form.firstStar) }}
+            </p>
+            <p>
+                {{ render_field(form.secondStar) }}
+              </p>
+              <p>
+                {{ render_field(form.thirdStar) }}
+              </p>
+              <p>
+                  {{ render_field(form.comments) }}
+                </p>
         <p>
             <input type="submit" value="Search"/>
         </p>

@@ -20,6 +20,10 @@
         <a href="/search">Player Search</a>
       </div>
 
-
+        {% for game in ugIdList %}
+        <div>
+            <a href="/usergames/{{ game[0] }}">{{ game[3] }} - {{ game[1] }} VS {{ game[2] }}</a>
+        </div>
+        {% endfor %}
 </body>
 </html>

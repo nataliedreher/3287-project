@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="static/css/index.css" />
+    <link rel="stylesheet" href="../static/css/index.css" />
 </head>
 <body>
     <div class="topnav">
@@ -18,8 +18,48 @@
         <a class="active" href="/usergames">User Games</a>
         <a href="/addgame">Add Game</a>
         <a href="/search">Player Search</a>
-      </div>
+        </div>
 
+        <h3>{{ ugLst[2] }} - {{ ugLst[0] }} VS {{ ugLst[1] }}</h3>
+        <p>
+        {{ ugLst[0] }}: {{ ugLst[3] }}
+        </p>
+        <p>
+            {{ ugLst[1] }}: {{ ugLst[4] }}
+        </p>
+        <p>
+            First Star: {{ ugLst[5] }}
+        </p>
+        <p>
+            Second Star: {{ ugLst[6] }}
+        </p>
+        <p>
+            Third Star: {{ ugLst[7] }}
+        </p>
+        <p>
+            Comments: {{ ugLst[8] }}
+        </p>
 
+        <h3>Plays:</h3>
+        {% for play in playsLst %}
+        <h4>Play {{ play[0] }}:</h4>
+        <div>
+            <p>Play Type: {{ play[1] }}</p>
+        </div>
+        <div>
+            <p>Team: {{ play[3] }}</p>
+        </div>
+        <div>
+            <p>Player: {{ play[2] }}</p>
+        </div>
+        <div>
+            <p>Period: {{ play[4] }}</p>
+        </div>
+        <div>
+            <p>Comment: {{ play[5] }}</p>
+        </div>
+        {% endfor %}
+        <br>
+        <a href="/usergames/{{ ugLst[9] }}/addplay">Add Play</a>
 </body>
 </html>

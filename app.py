@@ -8,7 +8,27 @@ class SearchForm(Form):
     search = StringField('Player Search', [DataRequired()])
     submit = SubmitField('Search', render_kw={'class': 'btn btn-success btn-block'})
 
+class AddGameForm(Form):
+    choices = ["ANA", "ARI", "BOS", "BUF", "CAR", "CBJ", "CGY", "CHI", "COL", "DAL", "DET", "EDM", "FLA", "LAK", "MIN", "MTL", "NJD", "NSH", "NYI", "NYR", "OTT", "PHI", "PIT", "SEA", "SJS", "STL", "TBL", "TOR", "VAN", "VGK", "WPG", "WSH"]
+    homeTeam = SelectField('Home Team:', choices=choices)
+    awayTeam = SelectField('Away Team:', choices=choices)
+    gameDate = StringField('Game Date (DD/MM/YYYY)', [DataRequired()])
+    homeScore = StringField('Home Score', [DataRequired()])
+    awayScore = StringField('Away Score', [DataRequired()])
+    firstStar = StringField('First Star', [DataRequired()])
+    secondStar = StringField('Second Star', [DataRequired()])
+    thirdStar = StringField('Third Star', [DataRequired()])
+    comments = StringField('comments', [DataRequired()])
+    submit = SubmitField('Submit', render_kw={'class': 'btn btn-success btn-block'})
 
+class AddPlayForm(Form):
+    choices = ["Goal", "Penalty", "Save", "Hit"]
+    playType = SelectField('Home Team:', choices=choices)
+    team = StringField('Team:', [DataRequired()]) 
+    player = StringField('Player:', [DataRequired()]) 
+    period = StringField('Period:', [DataRequired()]) 
+    comment = StringField('Comment:', [DataRequired()]) 
+    submit = SubmitField('Search', render_kw={'class': 'btn btn-success btn-block'})
 
 
 app = Flask(__name__)
@@ -206,28 +226,103 @@ FROM (SELECT name, season, team, position, (primaryAssists + secondaryAssists) A
 
 @app.route('/addgame', methods=['GET', 'POST'])
 def addgame():
-    form = SearchForm(request.form)
-    return make_response(render_template("addgame.html", stat=stat, leadersLst=leadersLst))
+    form = AddGameForm(request.form)
+    resLst = []
+    if request.method == 'POST':
+        conn = sqlite3.connect('hockey.db')
+        c = conn.cursor()
+        homeTeamStr = form.data['homeTeam']
+        awayTeamStr = form.data['awayTeam']
+        dateStr = form.data['gameDate']
+        homeScore = form.data['homeScore']
+        awayScore = form.data['awayScore']
+        first = form.data['firstStar']
+        second = form.data['secondStar']
+        third = form.data['thirdStar']
+        comment = form.data['comments']
+        addGameQuery = '''
+            INSERT INTO userGames (homeTeam, awayTeam, date, homeScore, awayScore, firstStar, secondStar, thirdStar, comments)
+            VALUES ('{}', '{}', '{}', {}, {}, '{}', '{}', '{}', '{}');
+        '''.format(homeTeamStr, awayTeamStr, dateStr, homeScore, awayScore, first, second, third, comment)
+        try:
+            c.execute(addGameQuery)
+            c.execute("SELECT userGameId FROM userGames ORDER BY userGameId DESC LIMIT 1;")
+            ugID = c.fetchone()
+            conn.commit()
+            conn.close()
+            url = '/usergames/' + str(ugID[0])
+            return redirect(url)
+        except:
+            return make_response(render_template("addgame.html", form=form, tryAgain=True))
+    
+   
+    return make_response(render_template("addgame.html", form=form, tryAgain=False))
 
 
 
 @app.route('/usergames')
 @app.route('/usergames/<string:gameid>')
 def usergame(gameid=None):
-    return make_response(render_template("usergames.html", stat=stat, leadersLst=leadersLst))
+
+    if gameid:
+        conn = sqlite3.connect('hockey.db')
+        c = conn.cursor()
+        ugQuery = '''
+            SELECT homeTeam, awayTeam, date, homeScore, awayScore, firstStar, secondStar, 
+                thirdStar, comments, userGameId
+            FROM userGames 
+            WHERE userGameId={};
+        '''.format(gameid)
+        c.execute(ugQuery)
+        ugLst = c.fetchone()
+
+        playsQuery = '''
+            SELECT playNum, playType, player, team, period, comment
+            FROM userPlays WHERE userGameId={}
+        '''.format(gameid)
+
+        c.execute(playsQuery)
+        playsLst = c.fetchall()
+        return make_response(render_template("usergame.html", ugLst=ugLst, playsLst=playsLst))
+
+    else:
+        conn = sqlite3.connect('hockey.db')
+        c = conn.cursor()
+        c.execute("SELECT userGameId, homeTeam, awayTeam, date FROM userGames ORDER BY date;")
+        ugIdList = c.fetchall()
+        return make_response(render_template("usergames.html", ugIdList=ugIdList))
 
 
 
 @app.route('/usergames/<string:gameid>/addplay', methods=['GET', 'POST'])
 def addplay(gameid=None):
-    search = StringField('Player Search', [DataRequired()])
-    search = StringField('Player Search', [DataRequired()])
-    search = StringField('Player Search', [DataRequired()])
-    search = StringField('Player Search', [DataRequired()])
-    submit = SubmitField('Search', render_kw={'class': 'btn btn-success btn-block'})
+    form = AddPlayForm(request.form)
 
-
-    return make_response(render_template("addplays.html", stat=stat, leadersLst=leadersLst))
+    if request.method == 'POST':
+        conn = sqlite3.connect('hockey.db')
+        c = conn.cursor()
+        playType = form.data['playType']
+        team = form.data['team']
+        player = form.data['player']
+        period = form.data['period']
+        comment = form.data['comment']
+        c.execute("SELECT COUNT(*) FROM userPlays WHERE userGameId=?", (gameid,))
+        playNum = c.fetchone()
+        addGameQuery = '''
+            INSERT INTO userPlays (playNum, playType, player, team, period, comment, userGameId)
+            VALUES ({}, '{}', '{}', '{}', '{}', '{}', {});
+        '''.format((playNum[0]+1), playType, team, player, period, comment, gameid)
+        try:
+            c.execute(addGameQuery)
+            conn.commit()
+            conn.close()
+            url = '/usergames/' + str(gameid)
+            return redirect(url)
+        except:
+            return make_response(render_template("addplays.html", form=form, tryAgain=True))
+        
+   
+    return make_response(render_template("addplays.html", form=form, tryAgain=False))
 
 
 

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="static/css/index.css" />
+    <link rel="stylesheet" href="../../static/css/index.css" />
 </head>
 <body>
     <div class="topnav">
@@ -20,6 +20,29 @@
         <a href="/search">Player Search</a>
       </div>
 
+      {% if tryAgain %}<h3>Please check inputs and resubmit</h3>{% endif %}
+      {% from "_formhelpers.html" import render_field %}
+      <form method="post">
+  
+          <p>
+            {{ render_field(form.playType) }}
+          </p>
+          <p>
+              {{ render_field(form.team) }}
+            </p>
+            <p>
+              {{ render_field(form.player) }}
+            </p>
+            <p>
+              {{ render_field(form.period) }}
+            </p>
+            <p>
+                {{ render_field(form.comment) }}
+              </p>
+          <p>
+              <input type="submit" value="Search"/>
+          </p>
+      </form>
 
 </body>
 </html>
